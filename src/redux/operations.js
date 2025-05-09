@@ -1,6 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
-// Örnek ürün verileri
 const products = [
   {
     id: 1,
@@ -104,7 +103,6 @@ export const fetchProducts = createAsyncThunk(
     "products/fetchProducts",
     async (_, thunkAPI) => {
         try {
-            // API çağrısı yerine statik veriyi döndürüyoruz
             return products;
         } catch (err) {
             return thunkAPI.rejectWithValue(err.message)
@@ -114,7 +112,6 @@ export const fetchProducts = createAsyncThunk(
 
 export const addTask = createAsyncThunk("products/addTask", async (task, thunkAPI) => {
     try {
-        // Yeni ürün ekleme işlemi
         const newProduct = {
             ...task,
             id: products.length + 1
@@ -125,4 +122,3 @@ export const addTask = createAsyncThunk("products/addTask", async (task, thunkAP
         return thunkAPI.rejectWithValue(err.message)
     }
 })
-

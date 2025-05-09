@@ -44,7 +44,7 @@ const HomePage = () => {
 
   return (
     <div className={styles.homePage}>
-      {/* Hero Section */}
+     
       <section className={styles.slidingHeader}>
         <div className={styles.sliderContainer}>
           <button className={`${styles.sliderArrow} ${styles.prev}`} onClick={handlePrevSlide}>
@@ -73,7 +73,7 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Featured Categories */}
+     
       <section className={styles.categoriesContainer}>
         <h2 className={styles.allProductsTitle}>Öne Çıkan Kategoriler</h2>
         <div className={styles.categorySection}>
@@ -102,7 +102,7 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Features Section */}
+      
       <section className={styles.mainContent}>
         <h2 className={styles.allProductsTitle}>Neden Bizi Tercih Etmelisiniz?</h2>
         <div className={styles.featuresGrid}>
@@ -124,7 +124,7 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Newsletter Section */}
+     
       <section className={styles.newsletter}>
         <div className={styles.newsletterContent}>
           <h2>Yeni Koleksiyonlardan Haberdar Olun</h2>

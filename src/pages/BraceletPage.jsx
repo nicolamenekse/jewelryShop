@@ -18,7 +18,7 @@ export default function BraceletPage() {
     navigate(`/product/${productId}`);
   };
 
-  // Son 10 ürünü al
+  
   const braceletProducts = products
     .filter(product => product.category === 'bracelet')
     .slice(-10);

@@ -19,7 +19,7 @@ export default function AllProductsPage() {
   console.log(products)
 
   useEffect(() => {
-    // URL'den kategori parametresini al
+    
     const params = new URLSearchParams(location.search);
     const category = params.get('category');
     if (category) {
@@ -33,7 +33,7 @@ export default function AllProductsPage() {
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
-    // URL'i güncelle
+   
     const params = new URLSearchParams(location.search);
     if (category) {
       params.set('category', category);
@@ -46,13 +46,12 @@ export default function AllProductsPage() {
   const handleSortChange = (sortType) => {
     setSortBy(sortType);
   };
-
-  // Kategoriye göre filtreleme
+ 
   const filteredByCategory = selectedCategory
     ? products.filter(product => product.category === selectedCategory)
     : products;
 
-  // Sıralama işlemi
+  
   const sortedProducts = [...filteredByCategory].sort((a, b) => {
     switch (sortBy) {
       case 'price-asc':
