@@ -1,32 +1,28 @@
 import React, { useState, useEffect } from "react";
 import styles from "./HomePage.module.css";
-import { useDispatch, useSelector } from "react-redux";
-import { selectProducts } from "../redux/selectors";
+import { useDispatch } from "react-redux";
 import { fetchProducts } from "../redux/operations";
-import { Link, useNavigate } from "react-router-dom";
-import OurMission from "../components/OurMission";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   const dispatch = useDispatch();
-  const products = useSelector(selectProducts);
-  const navigate = useNavigate();
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const slides = [
     {
-      image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-      title: "Etnik Mücevherlerin Büyülü Dünyası",
-      description: "El yapımı, benzersiz tasarımlarla kültürünüzü yansıtın"
+      image: "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80",
+      title: "Yeni Koleksiyon",
+      description: "2024 İlkbahar koleksiyonumuzu keşfedin"
     },
     {
-      image: "https://images.unsplash.com/photo-1611652022419-a9419f74343d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-      title: "Özel Tasarım Koleksiyonu",
+      image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80",
+      title: "Özel Tasarımlar",
       description: "Her parça bir sanat eseri"
     },
     {
-      image: "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-      title: "Geleneksel Motifler",
-      description: "Kültürel mirasımızı modern tasarımlarla buluşturuyoruz"
+      image: "https://images.unsplash.com/photo-1611652022419-a9419f74343d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80",
+      title: "El Yapımı Mücevherler",
+      description: "Geleneksel el sanatlarının modern yorumu"
     }
   ];
 
@@ -38,36 +34,31 @@ const HomePage = () => {
     return () => clearInterval(timer);
   }, [dispatch]);
 
-  const handleProductClick = (productId) => {
-    navigate(`/product/${productId}`);
+  const handlePrevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
   };
 
-  const featuredImages = [
-    "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-    "https://images.unsplash.com/photo-1611652022419-a9419f74343d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-    "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-  ];
-
-  // İlk 3 ürünü alıp featured görsellerle eşleştiriyoruz
-  const featuredProducts = products.slice(0, 3).map((product, index) => ({
-    ...product,
-    featuredImage: featuredImages[index]
-  }));
-
-  // Slider için ürünleri 3 kez tekrarlıyoruz
-  const repeatedProducts = [...featuredProducts, ...featuredProducts, ...featuredProducts];
+  const handleNextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
+  };
 
   return (
     <div className={styles.homePage}>
-      {/* Sliding Header Section */}
+      {/* Hero Section */}
       <section className={styles.slidingHeader}>
         <div className={styles.sliderContainer}>
+          <button className={`${styles.sliderArrow} ${styles.prev}`} onClick={handlePrevSlide}>
+            <i className="fas fa-chevron-left"></i>
+          </button>
+          <button className={`${styles.sliderArrow} ${styles.next}`} onClick={handleNextSlide}>
+            <i className="fas fa-chevron-right"></i>
+          </button>
           {slides.map((slide, index) => (
             <div
               key={index}
               className={`${styles.slide} ${index === currentSlide ? styles.active : ''}`}
               style={{
-                backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${slide.image})`
+                backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(${slide.image})`
               }}
             >
               <div className={styles.slideContent}>
@@ -80,15 +71,6 @@ const HomePage = () => {
             </div>
           ))}
         </div>
-        <div className={styles.sliderDots}>
-          {slides.map((_, index) => (
-            <button
-              key={index}
-              className={`${styles.dot} ${index === currentSlide ? styles.active : ''}`}
-              onClick={() => setCurrentSlide(index)}
-            />
-          ))}
-        </div>
       </section>
 
       {/* Featured Categories */}
@@ -97,7 +79,7 @@ const HomePage = () => {
         <div className={styles.categorySection}>
           <div className={styles.categoryCard}>
             <img 
-              src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+              src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80" 
               alt="Kolyeler" 
               className={styles.categoryImage} 
             />
@@ -108,7 +90,7 @@ const HomePage = () => {
           </div>
           <div className={styles.categoryCard}>
             <img 
-              src="https://images.unsplash.com/photo-1611652022419-a9419f74343d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+              src="https://images.unsplash.com/photo-1611652022419-a9419f74343d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80" 
               alt="Bileklikler" 
               className={styles.categoryImage} 
             />
@@ -120,36 +102,36 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Why Choose Us */}
+      {/* Features Section */}
       <section className={styles.mainContent}>
         <h2 className={styles.allProductsTitle}>Neden Bizi Tercih Etmelisiniz?</h2>
         <div className={styles.featuresGrid}>
           <div className={styles.feature}>
             <i className="fas fa-gem"></i>
-            <h3 className={styles.categoryTitle}>El Yapımı</h3>
+            <h3>El Yapımı</h3>
             <p>Her parça özenle el işçiliği ile üretilir</p>
           </div>
           <div className={styles.feature}>
             <i className="fas fa-award"></i>
-            <h3 className={styles.categoryTitle}>Kalite</h3>
+            <h3>Kalite</h3>
             <p>En kaliteli malzemeler kullanılır</p>
           </div>
           <div className={styles.feature}>
             <i className="fas fa-shipping-fast"></i>
-            <h3 className={styles.categoryTitle}>Hızlı Teslimat</h3>
+            <h3>Hızlı Teslimat</h3>
             <p>Güvenli ve hızlı kargo</p>
           </div>
         </div>
       </section>
 
-      {/* Newsletter */}
+      {/* Newsletter Section */}
       <section className={styles.newsletter}>
         <div className={styles.newsletterContent}>
-          <h2 className={styles.allProductsTitle}>Yeni Koleksiyonlardan Haberdar Olun</h2>
-          <p className={styles.allProductsSubtitle}>En yeni ürünler ve özel fırsatlardan ilk siz haberdar olun</p>
+          <h2>Yeni Koleksiyonlardan Haberdar Olun</h2>
+          <p>En yeni ürünler ve özel fırsatlardan ilk siz haberdar olun</p>
           <form className={styles.newsletterForm}>
             <input type="email" placeholder="E-posta adresiniz" />
-            <button type="submit" className={styles.viewAllButton}>Abone Ol</button>
+            <button type="submit">Abone Ol</button>
           </form>
         </div>
       </section>
