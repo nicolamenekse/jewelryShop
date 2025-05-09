@@ -12,7 +12,7 @@
   align-items: center;
   justify-content: space-between;
   transition: 0.3s ease-out;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: #81D8D0; /* Tiffany Blue */
   z-index: 1000;
   color: white;
   font-size: 16px;
@@ -24,13 +24,13 @@
 }
 
 .logo a {
-  color: #ffd700;
+  color: white;
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 .logo a:hover {
-  color: #ffa500;
+  color: #0ABAB5; /* Tiffany Dark Blue */
 }
 
 .searchContainer {
@@ -42,7 +42,7 @@
 .searchInput {
   width: 100%;
   padding: 10px 15px;
-  border: 2px solid #ffd700;
+  border: 2px solid white;
   border-radius: 25px;
   background-color: rgba(255, 255, 255, 0.1);
   color: white;
@@ -57,7 +57,7 @@
 .searchInput:focus {
   outline: none;
   background-color: rgba(255, 255, 255, 0.2);
-  border-color: #ffa500;
+  border-color: #0ABAB5; /* Tiffany Dark Blue */
 }
 
 .searchResults {
@@ -132,7 +132,7 @@
 }
 
 .list li a:hover {
-  color: #ffd700;
+  color: #0ABAB5; /* Tiffany Dark Blue */
 }
 
 @media (max-width: 768px) {

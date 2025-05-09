@@ -1,12 +1,13 @@
 /* Global Styles */
 :root {
-  --primary-color: #8B4513; /* Koyu kahverengi */
-  --secondary-color: #D2691E; /* Turuncu-kahverengi */
-  --accent-color: #CD853F; /* Açık kahverengi */
-  --text-color: #2C1810; /* Koyu kahverengi metin */
-  --background-color: #FFF8DC; /* Krem rengi arka plan */
-  --gold: #DAA520; /* Altın rengi */
-  --bronze: #CD7F32; /* Bronz rengi */
+  --tiffany-blue: #81D8D0;
+  --tiffany-dark-blue: #0ABAB5;
+  --text-color: #333333;
+  --background-color: #FFFFFF;
+  --accent-color: #D4AF37;
+  --gray-light: #F5F5F5;
+  --gray-medium: #E0E0E0;
+  --spacing-unit: 8px;
 }
 
 * {
@@ -16,10 +17,11 @@
 }
 
 body {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
   background-color: var(--background-color);
   color: var(--text-color);
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
 
 .app {
@@ -30,110 +32,160 @@ body {
 
 /* Navbar Styles */
 .navbar {
-  background-color: var(--primary-color);
-  padding: 1rem 2rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: var(--background-color);
+  padding: calc(var(--spacing-unit) * 2);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
 }
 
 .nav-links {
   display: flex;
-  gap: 2rem;
+  gap: calc(var(--spacing-unit) * 4);
   justify-content: center;
+  align-items: center;
 }
 
 .nav-links a {
-  color: var(--background-color);
+  color: var(--text-color);
   text-decoration: none;
-  font-size: 1.1rem;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
   transition: color 0.3s ease;
+  font-weight: 500;
 }
 
 .nav-links a:hover {
-  color: var(--gold);
+  color: var(--tiffany-blue);
 }
 
 /* Button Styles */
 .btn {
-  padding: 0.8rem 1.5rem;
-  border: 2px solid var(--primary-color);
+  padding: calc(var(--spacing-unit) * 2) calc(var(--spacing-unit) * 4);
+  border: 1px solid var(--tiffany-blue);
   background-color: transparent;
-  color: var(--primary-color);
-  font-family: 'Playfair Display', serif;
-  font-size: 1rem;
+  color: var(--tiffany-blue);
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
   cursor: pointer;
   transition: all 0.3s ease;
-  border-radius: 4px;
+  font-weight: 500;
 }
 
 .btn:hover {
-  background-color: var(--primary-color);
+  background-color: var(--tiffany-blue);
   color: var(--background-color);
 }
 
 .btn-primary {
-  background-color: var(--primary-color);
+  background-color: var(--tiffany-blue);
   color: var(--background-color);
 }
 
 .btn-primary:hover {
-  background-color: var(--secondary-color);
-  border-color: var(--secondary-color);
+  background-color: var(--tiffany-dark-blue);
+  border-color: var(--tiffany-dark-blue);
 }
 
 /* Product Card Styles */
 .product-card {
-  background-color: white;
-  border-radius: 8px;
+  background-color: var(--background-color);
+  border: 1px solid var(--gray-medium);
   overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .product-card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .product-image {
   width: 100%;
-  height: 300px;
+  height: 400px;
   object-fit: cover;
 }
 
 .product-info {
-  padding: 1.5rem;
+  padding: calc(var(--spacing-unit) * 3);
+  text-align: center;
 }
 
 .product-title {
-  font-size: 1.25rem;
-  color: var(--primary-color);
-  margin-bottom: 0.5rem;
+  font-size: 16px;
+  color: var(--text-color);
+  margin-bottom: calc(var(--spacing-unit) * 1);
+  font-weight: 500;
 }
 
 .product-price {
-  color: var(--gold);
-  font-size: 1.5rem;
-  font-weight: bold;
+  color: var(--text-color);
+  font-size: 18px;
+  font-weight: 500;
+}
+
+/* Hero Section */
+.hero-section {
+  height: 80vh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--background-color);
+  margin-top: 60px;
+}
+
+.hero-content {
+  max-width: 800px;
+  padding: calc(var(--spacing-unit) * 4);
+}
+
+.hero-title {
+  font-size: 48px;
+  font-weight: 300;
+  margin-bottom: calc(var(--spacing-unit) * 3);
+  letter-spacing: 2px;
+}
+
+/* Product Grid */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: calc(var(--spacing-unit) * 4);
+  padding: calc(var(--spacing-unit) * 4);
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 /* Footer Styles */
 .footer {
-  background-color: var(--primary-color);
-  color: var(--background-color);
-  padding: 2rem;
+  background-color: var(--gray-light);
+  color: var(--text-color);
+  padding: calc(var(--spacing-unit) * 8) calc(var(--spacing-unit) * 4);
   margin-top: auto;
 }
 
 .footer-content {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: calc(var(--spacing-unit) * 4);
   max-width: 1200px;
   margin: 0 auto;
 }
 
 .footer-section h3 {
-  color: var(--gold);
-  margin-bottom: 1rem;
+  color: var(--text-color);
+  margin-bottom: calc(var(--spacing-unit) * 3);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .footer-section ul {
@@ -141,17 +193,18 @@ body {
 }
 
 .footer-section ul li {
-  margin-bottom: 0.5rem;
+  margin-bottom: calc(var(--spacing-unit) * 1);
 }
 
 .footer-section a {
-  color: var(--background-color);
+  color: var(--text-color);
   text-decoration: none;
   transition: color 0.3s ease;
+  font-size: 14px;
 }
 
 .footer-section a:hover {
-  color: var(--gold);
+  color: var(--tiffany-blue);
 }
 
 /* Responsive Design */
@@ -164,22 +217,30 @@ body {
   .footer-content {
     grid-template-columns: 1fr;
   }
+
+  .hero-title {
+    font-size: 32px;
+  }
+
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--background-color);
+  background: var(--gray-light);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--primary-color);
-  border-radius: 5px;
+  background: var(--tiffany-blue);
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--secondary-color);
+  background: var(--tiffany-dark-blue);
 }

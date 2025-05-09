@@ -31,7 +31,7 @@ const Navbar = () => {
     <div className={css.navbarContainer}>
       <nav className={css.nav}>
         <div className={css.logo}>
-          <Link to="/">Jewelry Shop</Link>
+          <Link to="/">Meandmo Acc</Link>
         </div>
 
         <div className={css.searchContainer}>
