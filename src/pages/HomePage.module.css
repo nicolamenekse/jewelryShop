@@ -1,0 +1,431 @@
+.homePage {
+  padding-top: 80px; /* Navbar'ın yüksekliği kadar padding ekliyoruz */
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Sliding Header Styles */
+.slidingHeader {
+  position: relative;
+  height: 80vh;
+  overflow: hidden;
+  margin-bottom: 60px;
+}
+
+.sliderContainer {
+  position: relative;
+  height: 100%;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+}
+
+.slide.active {
+  opacity: 1;
+}
+
+.slideContent {
+  max-width: 800px;
+  padding: 0 20px;
+  z-index: 1;
+}
+
+.slideContent h1 {
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.slideContent p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.sliderDots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 2;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid white;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dot.active {
+  background: white;
+  transform: scale(1.2);
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  height: 80vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+              url('/images/hero-bg.jpg') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  margin-bottom: 60px;
+}
+
+.heroContent {
+  max-width: 800px;
+  padding: 0 20px;
+}
+
+.heroContent h1 {
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.heroContent p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+.slider {
+  width: 100%;
+  padding: 20px 0;
+  background-color: #f8f8f8;
+  overflow: hidden;
+  position: relative;
+}
+
+.slider h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 24px;
+}
+
+.slideTrack {
+  display: flex;
+  animation: scroll 30s linear infinite;
+  width: calc(250px * 6); /* 3 slides * 2 for infinite loop */
+}
+
+.slide:hover {
+  transform: scale(1.05);
+}
+
+.slide img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.slide p {
+  margin-top: 10px;
+  color: #666;
+  font-size: 16px;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-250px * 3)); /* Move by 3 slides */
+  }
+}
+
+/* Yeni eklenen stiller */
+.mainContent {
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.categoriesContainer {
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.categorySection {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.categoryCard {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+  aspect-ratio: 16/9;
+}
+
+.categoryCard:hover {
+  transform: translateY(-5px);
+}
+
+.categoryImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.categoryCard:hover .categoryImage {
+  transform: scale(1.05);
+}
+
+.categoryOverlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  color: white;
+  text-align: center;
+}
+
+.categoryTitle {
+  font-size: 24px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.categoryLink {
+  display: inline-block;
+  padding: 10px 25px;
+  background-color: white;
+  color: #333;
+  text-decoration: none;
+  border-radius: 25px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.categoryLink:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* Tüm Ürünler Bölümü Stilleri */
+.allProductsSection {
+  padding: 60px 20px;
+  background-color: #f9f9f9;
+}
+
+.allProductsHeader {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.allProductsTitle {
+  font-size: 32px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.allProductsSubtitle {
+  font-size: 16px;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.productsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.productCard {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.productCard:hover {
+  transform: translateY(-5px);
+}
+
+.productImage {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.productInfo {
+  padding: 20px;
+}
+
+.productTitle {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.productPrice {
+  font-size: 20px;
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.viewAllButton {
+  display: block;
+  width: 200px;
+  margin: 40px auto 0;
+  padding: 15px 30px;
+  background-color: #333;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 25px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.viewAllButton:hover {
+  background-color: #555;
+  transform: translateY(-2px);
+}
+
+/* Features Grid */
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.feature {
+  text-align: center;
+  padding: 30px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.feature:hover {
+  transform: translateY(-5px);
+}
+
+.feature i {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+}
+
+/* Newsletter Section */
+.newsletter {
+  background-color: #f9f9f9;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.newsletterContent {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.newsletterForm {
+  display: flex;
+  gap: 15px;
+  margin-top: 30px;
+  justify-content: center;
+}
+
+.newsletterForm input {
+  flex: 1;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+  font-size: 1rem;
+  max-width: 400px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .slideContent h1 {
+    font-size: 2.5rem;
+  }
+
+  .slidingHeader {
+    height: 60vh;
+  }
+
+  .categorySection {
+    grid-template-columns: 1fr;
+  }
+
+  .categoryCard {
+    aspect-ratio: 16/9;
+  }
+
+  .newsletterForm {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .newsletterForm input {
+    width: 100%;
+  }
+
+  .viewAllButton {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .slideContent h1 {
+    font-size: 2rem;
+  }
+
+  .slideContent p {
+    font-size: 1rem;
+  }
+
+  .slidingHeader {
+    height: 50vh;
+  }
+
+  .categoryTitle {
+    font-size: 20px;
+  }
+}
