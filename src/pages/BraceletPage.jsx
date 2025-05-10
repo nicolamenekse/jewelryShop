@@ -1,68 +1,84 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectProducts } from '../redux/selectors';
-import { fetchProducts } from '../redux/operations';
+import { selectFilteredUsers } from '../redux/selectors';
+import { fetchUsers } from '../redux/operations';
 import { useNavigate } from 'react-router-dom';
-import css from './BraceletPage.module.css';
+import styles from './BraceletPage.module.css';
 
-export default function BraceletPage() {
+const FemalePage = () => {
   const dispatch = useDispatch();
-  const products = useSelector(selectProducts);
   const navigate = useNavigate();
+  const users = useSelector(selectFilteredUsers);
 
   useEffect(() => {
-    dispatch(fetchProducts());
+    dispatch(fetchUsers());
   }, [dispatch]);
 
-  const handleProductClick = (productId) => {
-    navigate(`/product/${productId}`);
+  const femaleUsers = users.filter(user => user.gender === 'female');
+
+  const handleUserClick = (userId) => {
+    navigate(`/user/${userId}`);
   };
 
-  
-  const braceletProducts = products
-    .filter(product => product.category === 'bracelet')
-    .slice(-10);
+  const renderUserCard = (user) => (
+    <div 
+      key={user.id} 
+      className={styles.productCard}
+      onClick={() => handleUserClick(user.id)}
+    >
+      <div className={styles.imageContainer}>
+        <img 
+          src={user.image} 
+          alt={user.name} 
+          className={styles.productImage}
+        />
+        <div className={styles.overlay}>
+          <button className={styles.viewButton}>Profili Gör</button>
+        </div>
+      </div>
+      <div className={styles.productInfo}>
+        <h3 className={styles.productTitle}>{user.name}</h3>
+        <p className={styles.productPrice}>{user.age} yaşında</p>
+        <p className={styles.productDescription}>{user.bio}</p>
+        <div className={styles.userStats}>
+          <span className={styles.friendCount}>
+            <i className="fas fa-user-friends"></i> {user.friendCount} arkadaş
+          </span>
+          <span className={`${styles.availability} ${user.isAvailable ? styles.available : styles.unavailable}`}>
+            {user.isAvailable ? 'Arkadaş olmaya hazır' : 'Şu an müsait değil'}
+          </span>
+        </div>
+        <div className={styles.interests}>
+          {user.interests.map((interest, index) => (
+            <span key={index} className={styles.interestTag}>
+              {interest}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 
   return (
-    <div className={css.braceletPage}>
-      <div className={css.header}>
-        <h1 className={css.title}>Bileklik Koleksiyonu</h1>
-        <p className={css.subtitle}>
-          Özenle seçilmiş bileklik koleksiyonumuzda sizin için en özel parçaları bulabilirsiniz.
+    <div className={styles.braceletPage}>
+      <div className={styles.header}>
+        <h1 className={styles.title}>Kadın Arkadaşlar</h1>
+        <p className={styles.subtitle}>
+          Ortak ilgi alanlarına sahip kadın arkadaşlar edinmek için ideal platform.
         </p>
       </div>
 
-      <div className={css.productsGrid}>
-        {braceletProducts.map((product) => (
-          <div 
-            key={product.id} 
-            className={css.productCard}
-            onClick={() => handleProductClick(product.id)}
-          >
-            <div className={css.imageContainer}>
-              <img 
-                src={product.image} 
-                alt={product.title} 
-                className={css.productImage}
-              />
-              <div className={css.overlay}>
-                <button className={css.viewButton}>Detayları Gör</button>
-              </div>
-            </div>
-            <div className={css.productInfo}>
-              <h3 className={css.productTitle}>{product.title}</h3>
-              <p className={css.productPrice}>${product.price}</p>
-              <p className={css.productDescription}>{product.description}</p>
-            </div>
+      <div className={styles.productsGrid}>
+        {femaleUsers.length > 0 ? (
+          femaleUsers.map(renderUserCard)
+        ) : (
+          <div className={styles.noProducts}>
+            <p>Henüz kadın kullanıcı bulunmamaktadır.</p>
           </div>
-        ))}
+        )}
       </div>
-
-      {braceletProducts.length === 0 && (
-        <div className={css.noProducts}>
-          <p>Henüz bileklik ürünü bulunmamaktadır.</p>
-        </div>
-      )}
     </div>
   );
-}
+};
+
+export default FemalePage;

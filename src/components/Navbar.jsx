@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectProducts } from "../redux/selectors";
+import { selectFilteredUsers } from "../redux/selectors";
 import css from "./Navbar.module.css";
 
 const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [showResults, setShowResults] = useState(false);
-  const products = useSelector(selectProducts);
+  const users = useSelector(selectFilteredUsers);
   const navigate = useNavigate();
 
   const handleSearch = (e) => {
@@ -16,54 +16,64 @@ const Navbar = () => {
     setShowResults(query.length > 0);
   };
 
-  const handleProductClick = (productId) => {
+  const handleUserClick = (userId) => {
     setSearchQuery("");
     setShowResults(false);
-    navigate(`/product/${productId}`);
+    navigate(`/user/${userId}`);
   };
 
-  const filteredProducts = products.filter((product) =>
-    product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    product.description.toLowerCase().includes(searchQuery.toLowerCase())
-  ).slice(0, 5); // En fazla 5 sonuç göster
+  const filteredUsers = users.filter((user) =>
+    user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    user.bio.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    user.interests.some(interest => 
+      interest.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+  ).slice(0, 5);
 
   return (
     <div className={css.navbarContainer}>
       <nav className={css.nav}>
         <div className={css.logo}>
-          <Link to="/">Meandmo Acc</Link>
+          <Link to="/">FriendFinder</Link>
         </div>
 
         <div className={css.searchContainer}>
           <input
             type="text"
-            placeholder="Ürün ara..."
+            placeholder="İsim, ilgi alanı veya bio ara..."
             value={searchQuery}
             onChange={handleSearch}
             className={css.searchInput}
           />
           {showResults && (
             <div className={css.searchResults}>
-              {filteredProducts.length > 0 ? (
-                filteredProducts.map((product) => (
+              {filteredUsers.length > 0 ? (
+                filteredUsers.map((user) => (
                   <div
-                    key={product.id}
+                    key={user.id}
                     className={css.searchResultItem}
-                    onClick={() => handleProductClick(product.id)}
+                    onClick={() => handleUserClick(user.id)}
                   >
                     <img
-                      src={product.image}
-                      alt={product.title}
+                      src={user.image}
+                      alt={user.name}
                       className={css.searchResultImage}
                     />
                     <div className={css.searchResultInfo}>
-                      <h4>{product.title}</h4>
-                      <p>${product.price}</p>
+                      <h4>{user.name}</h4>
+                      <p>{user.age} yaşında</p>
+                      <div className={css.searchResultInterests}>
+                        {user.interests.slice(0, 2).map((interest, index) => (
+                          <span key={index} className={css.interestTag}>
+                            {interest}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 ))
               ) : (
-                <div className={css.noResults}>Sonuç bulunamadı</div>
+                <div className={css.noResults}>Kullanıcı bulunamadı</div>
               )}
             </div>
           )}
@@ -74,16 +84,16 @@ const Navbar = () => {
             <Link to="/">Ana Sayfa</Link>
           </li>
           <li>
-            <Link to="/allProducts">Tüm Ürünler</Link>
+            <Link to="/users">Tüm Kullanıcılar</Link>
           </li>
           <li>
-            <Link to="/necklace">Kolyeler</Link>
+            <Link to="/male">Erkek Arkadaşlar</Link>
           </li>
           <li>
-            <Link to="/bracelet">Bileklikler</Link>
+            <Link to="/female">Kadın Arkadaşlar</Link>
           </li>
           <li>
-            <Link to="/ourMission">Hakkımızda</Link>
+            <Link to="/about">Hakkımızda</Link>
           </li>
         </ul>
       </nav>

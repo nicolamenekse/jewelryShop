@@ -1,124 +1,106 @@
-import { createAsyncThunk } from '@reduxjs/toolkit'
+import { createAsyncThunk, createAction } from '@reduxjs/toolkit'
+import defaultProfile from '../assets/default-profile.jpg'
 
-const products = [
+const users = [
   {
     id: 1,
-    title: "Altın Kolye",
-    price: 1299.99,
-    description: "Zarif tasarımlı 14 ayar altın kolye",
-    category: "necklace",
-    image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+    name: "Ayşe Yılmaz",
+    age: 25,
+    bio: "Seyahat etmeyi ve yeni yerler keşfetmeyi seven, müzik tutkunu biriyim. Kitap okumak ve doğa yürüyüşleri benim için vazgeçilmez.",
+    gender: "female",
+    isAvailable: true,
+    friendCount: 156,
+    image: defaultProfile,
+    interests: ["seyahat", "müzik", "kitap", "doğa"]
   },
   {
     id: 2,
-    title: "İnci Kolye",
-    price: 899.99,
-    description: "Doğal inci kolye",
-    category: "necklace",
-    image: "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+    name: "Mehmet Demir",
+    age: 28,
+    bio: "Yazılım geliştirici olarak çalışıyorum. Spor yapmayı ve teknoloji ile ilgilenmeyi seviyorum.",
+    gender: "male",
+    isAvailable: true,
+    friendCount: 89,
+    image: defaultProfile,
+    interests: ["teknoloji", "spor", "yazılım"]
   },
   {
     id: 3,
-    title: "Elmas Kolye",
-    price: 2499.99,
-    description: "Pırlanta taşlı altın kolye",
-    category: "necklace",
-    image: "https://images.unsplash.com/photo-1611652022419-a9419f74343d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+    name: "Zeynep Kaya",
+    age: 23,
+    bio: "Grafik tasarımcıyım. Sanat ve fotoğrafçılık benim tutkum. Yeni insanlarla tanışmayı seviyorum.",
+    gender: "female",
+    isAvailable: false,
+    friendCount: 234,
+    image: defaultProfile,
+    interests: ["sanat", "fotoğrafçılık", "tasarım"]
   },
   {
     id: 4,
-    title: "Gümüş Bileklik",
-    price: 299.99,
-    description: "El yapımı gümüş bileklik",
-    category: "bracelet",
-    image: "https://images.unsplash.com/photo-1611652022419-a9419f74343d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+    name: "Can Öztürk",
+    age: 30,
+    bio: "Mühendis olarak çalışıyorum. Doğa sporları ve kamp yapmak en büyük hobilerim.",
+    gender: "male",
+    isAvailable: true,
+    friendCount: 145,
+    image: defaultProfile,
+    interests: ["kamp", "doğa sporları", "mühendislik"]
   },
   {
     id: 5,
-    title: "Altın Bileklik",
-    price: 1499.99,
-    description: "14 ayar altın bileklik",
-    category: "bracelet",
-    image: "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-  },
-  {
-    id: 6,
-    title: "Pandora Bileklik",
-    price: 799.99,
-    description: "Pandora marka gümüş bileklik",
-    category: "bracelet",
-    image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-  },
-  {
-    id: 7,
-    title: "Vintage Kolye",
-    price: 599.99,
-    description: "Vintage tarz gümüş kolye",
-    category: "necklace",
-    image: "https://images.unsplash.com/photo-1611652022419-a9419f74343d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-  },
-  {
-    id: 8,
-    title: "Minimalist Kolye",
-    price: 399.99,
-    description: "Minimalist tasarımlı gümüş kolye",
-    category: "necklace",
-    image: "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-  },
-  {
-    id: 9,
-    title: "Çelik Bileklik",
-    price: 199.99,
-    description: "Paslanmaz çelik bileklik",
-    category: "bracelet",
-    image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-  },
-  {
-    id: 10,
-    title: "Altın Zincir",
-    price: 899.99,
-    description: "14 ayar altın zincir",
-    category: "necklace",
-    image: "https://images.unsplash.com/photo-1611652022419-a9419f74343d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-  },
-  {
-    id: 11,
-    title: "Gümüş Zincir",
-    price: 299.99,
-    description: "925 ayar gümüş zincir",
-    category: "necklace",
-    image: "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-  },
-  {
-    id: 12,
-    title: "Altın Bilezik",
-    price: 1999.99,
-    description: "22 ayar altın bilezik",
-    category: "bracelet",
-    image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
+    name: "Elif Şahin",
+    age: 26,
+    bio: "Doktor olarak çalışıyorum. Dans etmeyi ve yeni restoranlar keşfetmeyi seviyorum.",
+    gender: "female",
+    isAvailable: true,
+    friendCount: 178,
+    image: defaultProfile,
+    interests: ["dans", "yemek", "seyahat"]
   }
 ];
 
-export const fetchProducts = createAsyncThunk(
-    "products/fetchProducts",
+export const fetchUsers = createAsyncThunk(
+    "users/fetchUsers",
     async (_, thunkAPI) => {
         try {
-            return products;
+            return users;
         } catch (err) {
             return thunkAPI.rejectWithValue(err.message)
         }
     }
 )
 
-export const addTask = createAsyncThunk("products/addTask", async (task, thunkAPI) => {
+export const addUser = createAsyncThunk("users/addUser", async (user, thunkAPI) => {
     try {
-        const newProduct = {
-            ...task,
-            id: products.length + 1
+        const newUser = {
+            ...user,
+            id: users.length + 1,
+            friendCount: 0,
+            isAvailable: true
         };
-        products.push(newProduct);
-        return newProduct;
+        users.push(newUser);
+        return newUser;
     } catch (err) {
         return thunkAPI.rejectWithValue(err.message)
     }
 })
+
+export const updateUserStatus = createAsyncThunk(
+    "users/updateStatus",
+    async ({ userId, isAvailable }, thunkAPI) => {
+        try {
+            const userIndex = users.findIndex(user => user.id === userId);
+            if (userIndex !== -1) {
+                users[userIndex].isAvailable = isAvailable;
+                return users[userIndex];
+            }
+            throw new Error("User not found");
+        } catch (err) {
+            return thunkAPI.rejectWithValue(err.message)
+        }
+    }
+)
+
+export const setGenderFilter = createAction('users/setGenderFilter');
+export const setAvailabilityFilter = createAction('users/setAvailabilityFilter');
+export const setAgeRange = createAction('users/setAgeRange');

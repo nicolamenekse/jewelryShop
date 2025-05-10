@@ -1,45 +1,60 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectProducts } from '../redux/selectors';
-import { fetchProducts } from '../redux/operations';
+import { selectFilteredUsers } from '../redux/selectors';
+import { fetchUsers } from '../redux/operations';
 import { useNavigate } from 'react-router-dom';
 import styles from './NecklacePage.module.css';
 
-const NecklacePage = () => {
+const MalePage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const products = useSelector(selectProducts);
+  const users = useSelector(selectFilteredUsers);
 
   useEffect(() => {
-    dispatch(fetchProducts());
+    dispatch(fetchUsers());
   }, [dispatch]);
 
-  const necklaceProducts = products.filter(product => product.category === 'necklace');
+  const maleUsers = users.filter(user => user.gender === 'male');
 
-  const handleProductClick = (productId) => {
-    navigate(`/product/${productId}`);
+  const handleUserClick = (userId) => {
+    navigate(`/user/${userId}`);
   };
 
-  const renderProductCard = (product) => (
+  const renderUserCard = (user) => (
     <div 
-      key={product.id} 
+      key={user.id} 
       className={styles.productCard}
-      onClick={() => handleProductClick(product.id)}
+      onClick={() => handleUserClick(user.id)}
     >
       <div className={styles.imageContainer}>
         <img 
-          src={product.image} 
-          alt={product.title} 
+          src={user.image} 
+          alt={user.name} 
           className={styles.productImage}
         />
         <div className={styles.overlay}>
-          <button className={styles.viewButton}>Detayları Gör</button>
+          <button className={styles.viewButton}>Profili Gör</button>
         </div>
       </div>
       <div className={styles.productInfo}>
-        <h3 className={styles.productTitle}>{product.title}</h3>
-        <p className={styles.productPrice}>${product.price}</p>
-        <p className={styles.productDescription}>{product.description}</p>
+        <h3 className={styles.productTitle}>{user.name}</h3>
+        <p className={styles.productPrice}>{user.age} yaşında</p>
+        <p className={styles.productDescription}>{user.bio}</p>
+        <div className={styles.userStats}>
+          <span className={styles.friendCount}>
+            <i className="fas fa-user-friends"></i> {user.friendCount} arkadaş
+          </span>
+          <span className={`${styles.availability} ${user.isAvailable ? styles.available : styles.unavailable}`}>
+            {user.isAvailable ? 'Arkadaş olmaya hazır' : 'Şu an müsait değil'}
+          </span>
+        </div>
+        <div className={styles.interests}>
+          {user.interests.map((interest, index) => (
+            <span key={index} className={styles.interestTag}>
+              {interest}
+            </span>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -47,18 +62,18 @@ const NecklacePage = () => {
   return (
     <div className={styles.necklacePage}>
       <div className={styles.header}>
-        <h1 className={styles.title}>Kolye Koleksiyonu</h1>
+        <h1 className={styles.title}>Erkek Arkadaşlar</h1>
         <p className={styles.subtitle}>
-          Özenle seçilmiş kolye koleksiyonumuzda sizin için en özel parçaları bulabilirsiniz.
+          Ortak ilgi alanlarına sahip erkek arkadaşlar edinmek için ideal platform.
         </p>
       </div>
 
       <div className={styles.productsGrid}>
-        {necklaceProducts.length > 0 ? (
-          necklaceProducts.map(renderProductCard)
+        {maleUsers.length > 0 ? (
+          maleUsers.map(renderUserCard)
         ) : (
           <div className={styles.noProducts}>
-            <p>Henüz kolye ürünü bulunmamaktadır.</p>
+            <p>Henüz erkek kullanıcı bulunmamaktadır.</p>
           </div>
         )}
       </div>
@@ -66,4 +81,4 @@ const NecklacePage = () => {
   );
 };
 
-export default NecklacePage;
+export default MalePage;

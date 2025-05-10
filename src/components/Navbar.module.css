@@ -1,63 +1,57 @@
 .navbarContainer {
-  width: 100%;
-}
-
-.nav {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  padding: 16px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  transition: 0.3s ease-out;
-  background-color: #81D8D0; /* Tiffany Blue */
+  right: 0;
   z-index: 1000;
-  color: white;
-  font-size: 16px;
+  background: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .logo {
-  font-size: 24px;
-  font-weight: bold;
+  font-size: 1.5rem;
+  font-weight: 700;
 }
 
 .logo a {
-  color: white;
+  color: #4CAF50;
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 .logo a:hover {
-  color: #0ABAB5; /* Tiffany Dark Blue */
+  color: #45a049;
 }
 
 .searchContainer {
   position: relative;
-  flex: 0 1 400px;
-  margin: 0 20px;
+  flex: 1;
+  max-width: 500px;
+  margin: 0 2rem;
 }
 
 .searchInput {
   width: 100%;
-  padding: 10px 15px;
-  border: 2px solid white;
+  padding: 0.8rem 1.5rem;
+  border: 2px solid #e0e0e0;
   border-radius: 25px;
-  background-color: rgba(255, 255, 255, 0.1);
-  color: white;
-  font-size: 14px;
+  font-size: 1rem;
   transition: all 0.3s ease;
-}
-
-.searchInput::placeholder {
-  color: rgba(255, 255, 255, 0.7);
 }
 
 .searchInput:focus {
   outline: none;
-  background-color: rgba(255, 255, 255, 0.2);
-  border-color: #0ABAB5; /* Tiffany Dark Blue */
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
 }
 
 .searchResults {
@@ -65,33 +59,32 @@
   top: 100%;
   left: 0;
   right: 0;
-  margin-top: 10px;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  margin-top: 0.5rem;
   max-height: 400px;
   overflow-y: auto;
-  z-index: 1001;
 }
 
 .searchResultItem {
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding: 1rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .searchResultItem:hover {
-  background-color: #f5f5f5;
+  background-color: #f8f9fa;
 }
 
 .searchResultImage {
   width: 50px;
   height: 50px;
+  border-radius: 50%;
   object-fit: cover;
-  border-radius: 4px;
-  margin-right: 10px;
+  margin-right: 1rem;
 }
 
 .searchResultInfo {
@@ -100,59 +93,89 @@
 
 .searchResultInfo h4 {
   margin: 0;
-  font-size: 14px;
-  color: #333;
+  color: #2c3e50;
+  font-size: 1rem;
 }
 
 .searchResultInfo p {
-  margin: 5px 0 0;
-  font-size: 14px;
+  margin: 0.3rem 0;
   color: #666;
+  font-size: 0.9rem;
+}
+
+.searchResultInterests {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.interestTag {
+  background: #f0f0f0;
+  color: #666;
+  padding: 0.2rem 0.5rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
 }
 
 .noResults {
-  padding: 15px;
+  padding: 1rem;
   text-align: center;
   color: #666;
 }
 
 .list {
-  list-style-type: none;
+  display: flex;
+  gap: 2rem;
+  list-style: none;
   margin: 0;
   padding: 0;
-  display: flex;
-  align-items: center;
-  gap: 20px;
 }
 
 .list li a {
-  color: white;
+  color: #2c3e50;
   text-decoration: none;
+  font-weight: 500;
   transition: color 0.3s ease;
 }
 
 .list li a:hover {
-  color: #0ABAB5; /* Tiffany Dark Blue */
+  color: #4CAF50;
 }
 
 @media (max-width: 768px) {
   .nav {
-    flex-wrap: wrap;
-    padding: 10px;
-  }
-
-  .logo {
-    font-size: 20px;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
   }
 
   .searchContainer {
-    order: 3;
-    flex: 1 1 100%;
-    margin: 10px 0 0;
+    margin: 1rem 0;
+    max-width: 100%;
   }
 
   .list {
-    display: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .list {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .searchResultItem {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .searchResultImage {
+    margin-right: 0;
+    margin-bottom: 1rem;
   }
 }
 

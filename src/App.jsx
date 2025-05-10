@@ -2,11 +2,11 @@ import React from "react";
 import { Routes, Route } from 'react-router-dom';
 import HomePage from "./pages/HomePage";
 import Navbar from "./components/Navbar";
-import AllProductsPage from "./pages/AllProductsPage";
-import NecklacePage from "./pages/NecklacePage";
-import BraceletPage from "./pages/BraceletPage";
-import OurMission from "./components/OurMission";
-import ProductDetail from "./pages/ProductDetail";
+import AllUsersPage from "./pages/AllProductsPage";
+import MalePage from "./pages/NecklacePage";
+import FemalePage from "./pages/BraceletPage";
+import AboutUs from "./pages/OurMission";
+import UserDetail from "./pages/ProductDetail";
 import './App.css';
 
 export default function App() {
@@ -16,11 +16,11 @@ export default function App() {
       <main>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/allProducts" element={<AllProductsPage />} />
-          <Route path="/necklace" element={<NecklacePage />} />
-          <Route path="/bracelet" element={<BraceletPage />} />
-          <Route path="/ourMission" element={<OurMission />} />
-          <Route path="/product/:id" element={<ProductDetail />} />
+          <Route path="/users" element={<AllUsersPage />} />
+          <Route path="/male" element={<MalePage />} />
+          <Route path="/female" element={<FemalePage />} />
+          <Route path="/about" element={<AboutUs />} />
+          <Route path="/user/:id" element={<UserDetail />} />
         </Routes>
       </main>
     </div>

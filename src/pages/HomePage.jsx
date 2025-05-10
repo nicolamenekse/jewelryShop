@@ -1,33 +1,35 @@
 import React, { useState, useEffect } from "react";
 import styles from "./HomePage.module.css";
-import { useDispatch } from "react-redux";
-import { fetchProducts } from "../redux/operations";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUsers } from "../redux/operations";
+import { selectUserStats } from "../redux/selectors";
 import { Link } from "react-router-dom";
 
 const HomePage = () => {
   const dispatch = useDispatch();
   const [currentSlide, setCurrentSlide] = useState(0);
+  const stats = useSelector(selectUserStats);
 
   const slides = [
     {
-      image: "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80",
-      title: "Yeni Koleksiyon",
-      description: "2024 İlkbahar koleksiyonumuzu keşfedin"
+      image: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80",
+      title: "Yeni Arkadaşlar Edin",
+      description: "Ortak ilgi alanlarına sahip insanlarla tanışın"
     },
     {
-      image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80",
-      title: "Özel Tasarımlar",
-      description: "Her parça bir sanat eseri"
+      image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80",
+      title: "Sosyal Çevrenizi Genişletin",
+      description: "Yeni insanlarla tanışın ve hayatınıza renk katın"
     },
     {
-      image: "https://images.unsplash.com/photo-1611652022419-a9419f74343d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80",
-      title: "El Yapımı Mücevherler",
-      description: "Geleneksel el sanatlarının modern yorumu"
+      image: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80",
+      title: "Güvenli ve Samimi",
+      description: "Güvenli bir ortamda yeni arkadaşlıklar kurun"
     }
   ];
 
   useEffect(() => {
-    dispatch(fetchProducts());
+    dispatch(fetchUsers());
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 5000);
@@ -44,7 +46,6 @@ const HomePage = () => {
 
   return (
     <div className={styles.homePage}>
-     
       <section className={styles.slidingHeader}>
         <div className={styles.sliderContainer}>
           <button className={`${styles.sliderArrow} ${styles.prev}`} onClick={handlePrevSlide}>
@@ -64,8 +65,8 @@ const HomePage = () => {
               <div className={styles.slideContent}>
                 <h1>{slide.title}</h1>
                 <p>{slide.description}</p>
-                <Link to="/allProducts" className={styles.viewAllButton}>
-                  Koleksiyonu Keşfet
+                <Link to="/users" className={styles.viewAllButton}>
+                  Arkadaş Bul
                 </Link>
               </div>
             </div>
@@ -73,65 +74,62 @@ const HomePage = () => {
         </div>
       </section>
 
-     
       <section className={styles.categoriesContainer}>
-        <h2 className={styles.allProductsTitle}>Öne Çıkan Kategoriler</h2>
+        <h2 className={styles.allProductsTitle}>Arkadaş Bulma Kategorileri</h2>
         <div className={styles.categorySection}>
           <div className={styles.categoryCard}>
             <img 
-              src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80" 
-              alt="Kolyeler" 
+              src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80" 
+              alt="Erkek Arkadaşlar" 
               className={styles.categoryImage} 
             />
             <div className={styles.categoryOverlay}>
-              <h3 className={styles.categoryTitle}>Kolyeler</h3>
-              <Link to="/necklace" className={styles.categoryLink}>Keşfet</Link>
+              <h3 className={styles.categoryTitle}>Erkek Arkadaşlar</h3>
+              <Link to="/male" className={styles.categoryLink}>Keşfet</Link>
             </div>
           </div>
           <div className={styles.categoryCard}>
             <img 
-              src="https://images.unsplash.com/photo-1611652022419-a9419f74343d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80" 
-              alt="Bileklikler" 
+              src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80" 
+              alt="Kadın Arkadaşlar" 
               className={styles.categoryImage} 
             />
             <div className={styles.categoryOverlay}>
-              <h3 className={styles.categoryTitle}>Bileklikler</h3>
-              <Link to="/bracelet" className={styles.categoryLink}>Keşfet</Link>
+              <h3 className={styles.categoryTitle}>Kadın Arkadaşlar</h3>
+              <Link to="/female" className={styles.categoryLink}>Keşfet</Link>
             </div>
           </div>
         </div>
       </section>
 
-      
       <section className={styles.mainContent}>
-        <h2 className={styles.allProductsTitle}>Neden Bizi Tercih Etmelisiniz?</h2>
+        <h2 className={styles.allProductsTitle}>Platform İstatistikleri</h2>
         <div className={styles.featuresGrid}>
           <div className={styles.feature}>
-            <i className="fas fa-gem"></i>
-            <h3>El Yapımı</h3>
-            <p>Her parça özenle el işçiliği ile üretilir</p>
+            <i className="fas fa-users"></i>
+            <h3>Toplam Kullanıcı</h3>
+            <p>{stats.totalUsers} aktif üye</p>
           </div>
           <div className={styles.feature}>
-            <i className="fas fa-award"></i>
-            <h3>Kalite</h3>
-            <p>En kaliteli malzemeler kullanılır</p>
+            <i className="fas fa-user-friends"></i>
+            <h3>Arkadaş Olmaya Hazır</h3>
+            <p>{stats.availableUsers} kişi</p>
           </div>
           <div className={styles.feature}>
-            <i className="fas fa-shipping-fast"></i>
-            <h3>Hızlı Teslimat</h3>
-            <p>Güvenli ve hızlı kargo</p>
+            <i className="fas fa-heart"></i>
+            <h3>Ortalama Arkadaş</h3>
+            <p>Kişi başı {stats.averageFriendCount} arkadaş</p>
           </div>
         </div>
       </section>
 
-     
       <section className={styles.newsletter}>
         <div className={styles.newsletterContent}>
-          <h2>Yeni Koleksiyonlardan Haberdar Olun</h2>
-          <p>En yeni ürünler ve özel fırsatlardan ilk siz haberdar olun</p>
+          <h2>Yeni Arkadaşlıklar İçin Bize Katılın</h2>
+          <p>Yeni üyeler ve etkinliklerden haberdar olun</p>
           <form className={styles.newsletterForm}>
             <input type="email" placeholder="E-posta adresiniz" />
-            <button type="submit">Abone Ol</button>
+            <button type="submit">Üye Ol</button>
           </form>
         </div>
       </section>

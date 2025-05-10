@@ -1,13 +1,14 @@
 .homePage {
   width: 100%;
   overflow-x: hidden;
+  background-color: #f8f9fa;
 }
 
 /* Hero Section */
 .slidingHeader {
   position: relative;
   height: 100vh;
-  margin-top: -60px; /* Navbar'ın yüksekliği kadar negatif margin */
+  margin-top: -60px;
 }
 
 .sliderContainer {
@@ -36,6 +37,7 @@
 
 .sliderArrow:hover {
   background-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-50%) scale(1.1);
 }
 
 .sliderArrow.prev {
@@ -71,41 +73,58 @@
   max-width: 800px;
   padding: 0 20px;
   z-index: 2;
+  animation: fadeInUp 1s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .slideContent h1 {
   font-size: 48px;
-  font-weight: 300;
+  font-weight: 600;
   margin-bottom: 20px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .slideContent p {
-  font-size: 18px;
+  font-size: 20px;
   margin-bottom: 30px;
   line-height: 1.6;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .viewAllButton {
   display: inline-block;
   padding: 15px 40px;
-  background-color: transparent;
+  background-color: #4CAF50;
   color: white;
-  border: 1px solid white;
+  border: none;
+  border-radius: 25px;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 1px;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .viewAllButton:hover {
-  background-color: white;
-  color: #81D8D0;
+  background-color: #45a049;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Featured Categories */
+/* Categories Section */
 .categoriesContainer {
   padding: 80px 40px;
   background-color: white;
@@ -113,12 +132,11 @@
 
 .allProductsTitle {
   text-align: center;
-  font-size: 32px;
-  font-weight: 300;
+  font-size: 36px;
+  font-weight: 600;
   margin-bottom: 40px;
   color: #333;
-  text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
 }
 
 .categorySection {
@@ -131,8 +149,15 @@
 
 .categoryCard {
   position: relative;
-  height: 600px;
+  height: 500px;
   overflow: hidden;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.categoryCard:hover {
+  transform: translateY(-5px);
 }
 
 .categoryImage {
@@ -152,38 +177,38 @@
   left: 0;
   right: 0;
   padding: 40px;
-  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
   color: white;
 }
 
 .categoryTitle {
-  font-size: 24px;
-  font-weight: 300;
+  font-size: 28px;
+  font-weight: 600;
   margin-bottom: 15px;
-  text-transform: uppercase;
   letter-spacing: 1px;
 }
 
 .categoryLink {
   color: white;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 1px;
-  border-bottom: 1px solid white;
+  border-bottom: 2px solid #4CAF50;
   padding-bottom: 5px;
   transition: all 0.3s ease;
 }
 
 .categoryLink:hover {
-  color: #81D8D0;
-  border-color: #81D8D0;
+  color: #4CAF50;
+  border-color: white;
 }
 
 /* Features Section */
 .mainContent {
   padding: 80px 40px;
-  background-color: #f8f8f8;
+  background-color: #f8f9fa;
 }
 
 .featuresGrid {
@@ -197,17 +222,25 @@
 .feature {
   text-align: center;
   padding: 40px;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.feature:hover {
+  transform: translateY(-5px);
 }
 
 .feature i {
-  font-size: 40px;
-  color: #81D8D0;
+  font-size: 48px;
+  color: #4CAF50;
   margin-bottom: 20px;
 }
 
 .feature h3 {
-  font-size: 20px;
-  font-weight: 300;
+  font-size: 24px;
+  font-weight: 600;
   margin-bottom: 15px;
   color: #333;
 }
@@ -215,12 +248,13 @@
 .feature p {
   color: #666;
   line-height: 1.6;
+  font-size: 18px;
 }
 
 /* Newsletter Section */
 .newsletter {
   padding: 80px 40px;
-  background-color: #81D8D0;
+  background: linear-gradient(135deg, #4CAF50, #45a049);
   color: white;
 }
 
@@ -231,12 +265,14 @@
 }
 
 .newsletterContent h2 {
-  color: white;
+  font-size: 36px;
+  font-weight: 600;
   margin-bottom: 20px;
+  color: white;
 }
 
-.allProductsSubtitle {
-  font-size: 16px;
+.newsletterContent p {
+  font-size: 18px;
   margin-bottom: 30px;
   line-height: 1.6;
 }
@@ -250,30 +286,35 @@
 
 .newsletterForm input {
   flex: 1;
-  padding: 15px;
+  padding: 15px 20px;
   border: none;
-  font-size: 14px;
+  border-radius: 25px;
+  font-size: 16px;
+  outline: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .newsletterForm input:focus {
-  outline: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .newsletterForm button {
   padding: 15px 30px;
   background-color: white;
-  color: #81D8D0;
+  color: #4CAF50;
   border: none;
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .newsletterForm button:hover {
-  background-color: #0ABAB5;
-  color: white;
+  background-color: #f8f9fa;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 /* Responsive Design */
